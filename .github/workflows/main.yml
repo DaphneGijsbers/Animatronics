@@ -1,0 +1,16 @@
+name: run-Platformio-tests
+on: push
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v3
+
+      - name: Install PlatformIO
+        run:
+          python3 -m pip install --upgrade pip
+          pip install platformio
+
+      - name: Run native tests
+        run: platformio test -e native
