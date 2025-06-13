@@ -1,23 +1,22 @@
-#pragma once
-
 #ifndef NO_ARDUINO
 #include <Arduino.h>
 #include <WiFi.h>
 #include <WiFiUdp.h>
+#include <string>
 #else
 #include <string>
-using String = std::string;
 #endif
 
-class UdpHandler {
+#include "IUdpHandler.h"
+
+class UdpHandler : public IUdpHandler {
 public:
-    // Constructor parameters kunnen dummy zijn in native test
     UdpHandler(const char* ssid = nullptr, const char* password = nullptr,
                const char* laptopIP = nullptr, unsigned int laptopPort = 0, unsigned int localPort = 0);
 
-    void begin();
-    void sendMessage(const String& message);
-    String receiveMessage();
+    void begin() override;
+    void sendMessage(const std::string& message) override;
+    std::string receiveMessage() override;
 
 private:
 #ifndef NO_ARDUINO
@@ -27,7 +26,5 @@ private:
     unsigned int laptopPort;
     unsigned int localPort;
     WiFiUDP udp;
-#else
-    // Native test mocks kunnen hier lege of dummy data hebben
 #endif
 };

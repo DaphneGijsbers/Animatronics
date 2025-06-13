@@ -4,17 +4,13 @@
 #ifdef NO_ARDUINO
   #include <string>
   #include <cstdint>
-  
-  // Gebruik std::string als String
   using String = std::string;
-
-  // typedefs zoals uint32_t uit <cstdint> gebruiken, geen eigen definities!
 #else
   #include <Arduino.h>
 #endif
 
-#include "UdpHandler.h"
-#include "RobotArmController.h"
+#include "IUdpHandler.h"
+#include "IRobotArmController.h"
 
 enum class State {
   IDLE,
@@ -25,7 +21,7 @@ enum class State {
 
 class StateMachine {
 public:
-  StateMachine(UdpHandler& udp, RobotArmController& arm);
+  StateMachine(IUdpHandler& udp, IRobotArmController& arm);
 
   void update();
 
@@ -36,14 +32,13 @@ public:
   void forceState(State state);
 
 private:
-  UdpHandler& udpHandler;
-  RobotArmController& robotArm;
+  IUdpHandler& udpHandler;
+  IRobotArmController& robotArm;
 
   State currentState = State::IDLE;
   uint32_t lastMovementTime = 0;
   String laatsteCommando = "";
-  
-  // Pins for sensor (gebruik alleen als Arduino actief is)
+
 #ifndef NO_ARDUINO
   const int trigPin = 5;  
   const int echoPin = 18; 
