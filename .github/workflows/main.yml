@@ -11,7 +11,7 @@ jobs:
         uses: actions/cache@v3
         with:
           path: ~/.platformio
-          key: ${{ runner.os }}-platformio-${{ hashFiles('platformio.ini') }}
+          key: ${{ runner.os }}-platformio-${{ hashFiles('Servo test/platformio.ini') }}
           restore-keys: |
             ${{ runner.os }}-platformio-
 
@@ -21,4 +21,5 @@ jobs:
           pip3 install platformio
 
       - name: Run native tests
+        working-directory: Servo test
         run: platformio test -e native
