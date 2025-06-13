@@ -7,10 +7,18 @@ jobs:
       - name: Check out repository code
         uses: actions/checkout@v3
 
+      - name: Cache PlatformIO packages
+        uses: actions/cache@v3
+        with:
+          path: ~/.platformio
+          key: ${{ runner.os }}-platformio-${{ hashFiles('platformio.ini') }}
+          restore-keys: |
+            ${{ runner.os }}-platformio-
+
       - name: Install PlatformIO
-        run:
+        run: |
           python3 -m pip install --upgrade pip
-          pip install platformio
+          pip3 install platformio
 
       - name: Run native tests
         run: platformio test -e native
