@@ -3,8 +3,8 @@
 
 
 
-#include "mocks/UdpHandlerMock.h"
-#include "mocks/RobotArmControllerMock.h"
+#include "UdpHandlerMock.h"
+#include "RobotArmControllerMock.h"
 
 #include "StateMachine.h"
 
