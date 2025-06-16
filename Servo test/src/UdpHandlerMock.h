@@ -15,6 +15,6 @@ public:
     std::string getLastSentMessage() const;
 
 private:
-    std::string lastMessage;      // <- nodig voor sendMessage/getLastSentMessage
-    std::string mockedMessage;    // <- nodig voor receiveMessage
+    std::string lastMessage;      
+    std::string mockedMessage;    
 };

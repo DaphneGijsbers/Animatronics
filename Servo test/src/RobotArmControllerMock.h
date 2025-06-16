@@ -15,4 +15,4 @@ public:
     std::string lastAction;
 };
 
-#endif // ROBOTARMCONTROLLERMOCK_H
+#endif 

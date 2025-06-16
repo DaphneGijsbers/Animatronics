@@ -31,7 +31,7 @@ void UdpHandler::sendMessage(const std::string& message) {
   udp.print(msgArduino);
   udp.endPacket();
 #else
-  // Native build: dummy of logging (optioneel)
+  // Native build: dummy of logging 
 #endif
 }
 

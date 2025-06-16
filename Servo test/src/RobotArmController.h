@@ -5,14 +5,17 @@
 
 #ifndef NO_ARDUINO
 #include <Arduino.h>
+#include <ESP32Servo.h>
 #endif
 
 class RobotArmController : public IRobotArmController {
 public:
-    RobotArmController();
+    RobotArmController(Servo& elbow1, Servo& elbow2, Servo& thumb);
 
     void voerActieUit(const std::string& actie) override;
 
 private:
-    // Voeg hier eventueel private members toe zoals servo objecten e.d.
+    Servo& _elbow1;
+    Servo& _elbow2;
+    Servo& _thumb;
 };

@@ -2,7 +2,6 @@
 #include <string>
 
 
-
 #include "UdpHandlerMock.h"
 #include "RobotArmControllerMock.h"
 
@@ -29,23 +28,15 @@ void test_initial_state(void) {
 }
 
 void test_send_receive_message(void) {
-    // Stel in wat de mock moet "ontvangen"
+    
     udpMock.setMockedReceivedMessage("Hello");
 
-    // Update StateMachine, die zou receiveMessage kunnen oproepen
     sm->update();
 
     // Test of de mock ontvangen bericht teruggeeft zoals verwacht
     std::string received = udpMock.receiveMessage();
     TEST_ASSERT_EQUAL_STRING("Hello", received.c_str());
 
-    // Hier zou je ook checken of een actie is uitgevoerd, afhankelijk van je StateMachine-logic
-    // Bijvoorbeeld:
-    // TEST_ASSERT_TRUE(robotMock.actionExecuted);
-    // TEST_ASSERT_EQUAL_STRING("someAction", robotMock.lastAction.c_str());
-
-    // En als je verwacht dat er iets via UDP is gestuurd
-    // TEST_ASSERT_EQUAL_STRING("expectedMessage", udpMock.getLastSentMessage().c_str());
 }
 
 int main(int argc, char **argv) {

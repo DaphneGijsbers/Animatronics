@@ -41,14 +41,14 @@ void StateMachine::update() {
     case State::WACHT_OP_AI: {
       std::string cmd = udpHandler.receiveMessage();
       if (!cmd.empty()) {
-        laatsteCommando = cmd;
+        laatsteCommando = String(cmd.c_str());
         currentState = State::UITVOEREN;
       }
       break;
     }
 
     case State::UITVOEREN:
-      robotArm.voerActieUit(laatsteCommando);
+      robotArm.voerActieUit(std::string(laatsteCommando.c_str()));
       currentState = State::IDLE;
       break;
   }
@@ -63,7 +63,7 @@ void StateMachine::mockAfstand(long a) {
 }
 
 void StateMachine::mockTimeElapsed(uint32_t elapsed) {
-  // In test kun je hier lastMovementTime aanpassen om 'verlopen tijd' te simuleren
+  
   lastMovementTime = elapsed;
 }
 
@@ -73,7 +73,7 @@ void StateMachine::forceState(State state) {
 
 #ifndef NO_ARDUINO
 long StateMachine::readDistanceCM() {
-  // Sensor code, bijvoorbeeld HC-SR04 afstandsensor
+  
   digitalWrite(trigPin, LOW);
   delayMicroseconds(2);
   digitalWrite(trigPin, HIGH);
